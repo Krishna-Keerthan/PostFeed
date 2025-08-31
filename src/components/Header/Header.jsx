@@ -9,66 +9,43 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    {
-      name: 'Home',
-      slug: '/',
-      active: true
-    },
-    {
-      name: 'Login',
-      slug: '/login',
-      active: !authStatus
-    },
-    {
-      name: 'Signup',
-      slug: '/sign-up',
-      active: !authStatus
-    },
-    {
-      name: 'All Posts',
-      slug: '/all-posts',
-      active: authStatus
-    },
-    {
-      name: 'Add Posts',
-      slug: '/add-posts',
-      active: authStatus
-    },
+    { name: 'Home', slug: '/', active: true },
+    { name: 'Login', slug: '/login', active: !authStatus },
+    { name: 'Signup', slug: '/sign-up', active: !authStatus },
+    { name: 'All Posts', slug: '/all-posts', active: authStatus },
+    { name: 'Add Posts', slug: '/add-posts', active: authStatus },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-blue-200 shadow-sm">
+    <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border shadow-lg">
       <Container>
         <nav className="flex items-center justify-between h-16">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="transition-transform duration-200 group-hover:scale-105">
+              <span className="text-xl font-bold text-accent hidden sm:block tracking-tight">
                 <Logo />
-              </div>
-              <span className="text-xl font-bold text-blue-700 hidden sm:block">
-                Your Brand
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) =>
               item.active ? (
                 <button
                   key={item.name}
-                  className="relative px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 rounded-full hover:text-blue-700 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 group"
+                  className="relative px-4 py-2 text-sm font-medium text-text-secondary transition-all duration-300 rounded-full hover:text-accent hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent/30 group"
                   onClick={() => navigate(item.slug)}
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 transition-all duration-200 group-hover:w-full group-hover:left-0"></span>
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
                 </button>
               ) : null
             )}
-            
+
             {authStatus && (
-              <div className="ml-4 pl-4 border-l border-blue-200">
+              <div className="ml-4 pl-4 border-l border-border">
                 <LogoutBtn />
               </div>
             )}
@@ -76,11 +53,11 @@ function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            className="md:hidden p-2 rounded-lg hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent/30"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg
-              className="w-6 h-6 text-gray-700"
+              className="w-6 h-6 text-text"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -107,13 +84,13 @@ function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-blue-200 bg-blue-50/50 backdrop-blur-md">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-md">
+            <div className="px-3 pt-3 pb-4 space-y-2">
               {navItems.map((item) =>
                 item.active ? (
                   <button
                     key={item.name}
-                    className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-blue-700 hover:text-blue-100 transition-colors duration-200"
+                    className="block w-full text-left px-4 py-2 text-base font-medium text-text-secondary rounded-lg hover:text-accent hover:bg-accent/10 transition-all duration-200"
                     onClick={() => {
                       navigate(item.slug);
                       setIsMenuOpen(false);
@@ -123,9 +100,9 @@ function Header() {
                   </button>
                 ) : null
               )}
-              
+
               {authStatus && (
-                <div className="border-t border-blue-200 pt-3 mt-3">
+                <div className="border-t border-border pt-3 mt-3">
                   <LogoutBtn />
                 </div>
               )}

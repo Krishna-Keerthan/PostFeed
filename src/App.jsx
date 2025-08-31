@@ -10,29 +10,29 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-    useEffect(() => {
+  useEffect(() => {
     authService.getCurrentUser()
-    .then((userData) => {
-      if (userData) {
-        dispatch(login({userData}))
-      } else {
-        dispatch(logout())
-      }
-    })
-    .finally(() => setLoading(false))
-  }, [])
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   return !loading ? (
-    <div className="min-h-screen bg-gray-600 text-blue-50">
+    <div className="min-h-screen bg-bg-dark text-text transition-colors duration-300">
       <Header />
-      <main>
+      <main className="pt-4">
         <Outlet />
       </main>
       <Footer />
     </div>
   ) : (
-    <div className="min-h-screen bg-gray-600 text-blue-50 flex items-center justify-center">
-      <div>Loading...</div>
+    <div className="min-h-screen bg-bg-dark text-text flex items-center justify-center">
+      <div className="text-accent font-medium animate-pulse">Loading...</div>
     </div>
   );
 }

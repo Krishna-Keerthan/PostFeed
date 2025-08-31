@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+/* Dark Theme Variables */
+:root {
+  --color-bg: #0d0d0d;
+  --color-card: #1a1a1a;
+  --color-border: #2d2d2d;
+  --color-text: #eaeaea;
+  --color-text-secondary: #a0a0a0;
+  --color-accent: #6c63ff;
+  --color-accent-hover: #8b7bff;
+  --color-error: #ff5e5e;
+  --color-success: #3ccf91;
+  --color-link: #00c2ff;
+}
+
+/* Apply global dark theme */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Utility classes for custom colors */
+.bg-card {
+  background-color: var(--color-card);
+}
+.border-border {
+  border-color: var(--color-border);
+}
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.text-accent-hover:hover {
+  color: var(--color-accent-hover);
+}
+.text-link {
+  color: var(--color-link);
+}
+.text-error {
+  color: var(--color-error);
+}
+.text-success {
+  color: var(--color-success);
+}
+
+
+/* Input Wrapper */
+.input-wrapper {
+  width: 100%;
+}
+
+

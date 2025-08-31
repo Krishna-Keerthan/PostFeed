@@ -80,94 +80,95 @@ export default function PostForm ({post}){
         },[watch, slugTransform, setValue])
 
 
-        return (
-        <div className="min-h-screen bg-blue-50 py-8">
+       return (
+        <div className="min-h-screen bg-bg-dark py-8 text-text">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-white rounded-2xl shadow-lg border border-blue-200 p-8">
-                    <div className="mb-8">
-                        <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                            {post ? "Update Post" : "Create New Post"}
-                        </h1>
-                        <p className="text-blue-600/80">
-                            {post ? "Edit your existing post content and settings" : "Fill in the details to create a new post"}
-                        </p>
+            <div className="bg-card-dark rounded-2xl shadow-lg border border-border-dark p-8">
+                <div className="mb-8">
+                <h1 className="text-3xl font-bold text-accent mb-2">
+                    {post ? "Update Post" : "Create New Post"}
+                </h1>
+                <p className="text-text-secondary">
+                    {post ? "Edit your existing post content and settings" : "Fill in the details to create a new post"}
+                </p>
+                </div>
+
+                <form onSubmit={handleSubmit(submit)} className="flex flex-wrap gap-8">
+                <div className="w-2/3 px-2">
+                    <div className="space-y-6">
+                    <div className="bg-card-light rounded-xl p-6 border border-border-light">
+                        <h3 className="text-lg font-semibold text-accent mb-4">Post Details</h3>
+                        <Input
+                        label="Title :"
+                        placeholder="Enter post title"
+                        className="mb-4 bg-input-dark text-text"
+                        {...register("title", { required: true })}
+                        />
+                        <Input
+                        label="Slug :"
+                        placeholder="post-url-slug"
+                        className="mb-4 bg-input-dark text-text"
+                        {...register("slug", { required: true })}
+                        onInput={(e) => {
+                            setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+                        }}
+                        />
                     </div>
 
-                    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap gap-8">
-                        <div className="w-2/3 px-2">
-                            <div className="space-y-6">
-                                <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100">
-                                    <h3 className="text-lg font-semibold text-blue-800 mb-4">Post Details</h3>
-                                    <Input
-                                        label="Title :"
-                                        placeholder="Enter post title"
-                                        className="mb-4"
-                                        {...register("title", { required: true })}
-                                    />
-                                    <Input
-                                        label="Slug :"
-                                        placeholder="post-url-slug"
-                                        className="mb-4"
-                                        {...register("slug", { required: true })}
-                                        onInput={(e) => {
-                                            setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
-                                        }}
-                                    />
-                                </div>
-                                
-                                <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100">
-                                    <h3 className="text-lg font-semibold text-blue-800 mb-4">Content</h3>
-                                    <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="w-full lg:w-1/3">
-                            <div className="space-y-6">
-                                <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100">
-                                    <h3 className="text-lg font-semibold text-blue-800 mb-4">Featured Image</h3>
-                                    <Input
-                                        label="Upload Image :"
-                                        type="file"
-                                        className="mb-4"
-                                        accept="image/png, image/jpg, image/jpeg, image/gif"
-                                        {...register("image", { required: !post })}
-                                    />
-                                    {post && (
-                                        <div className="w-full mb-4">
-                                            <div className="relative group">
-                                                <img
-                                                    src={appService.filePreview(post.featuredImage)}
-                                                    alt={post.title}
-                                                    className="rounded-lg w-full h-48 object-cover border-2 border-blue-200 group-hover:border-blue-500 transition-colors duration-200"
-                                                />
-                                                <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg"></div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100">
-                                    <h3 className="text-lg font-semibold text-blue-800 mb-4">Post Settings</h3>
-                                    <Select
-                                        options={["active", "inactive"]}
-                                        label="Status"
-                                        className="mb-6"
-                                        {...register("status", { required: true })}
-                                    />
-                                    <Button 
-                                        type="submit" 
-                                        bgColor={post ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"} 
-                                        className="w-full py-3 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                                    > 
-                                        {post ? "Update Post" : "Create Post"}
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <div className="bg-card-light rounded-xl p-6 border border-border-light">
+                        <h3 className="text-lg font-semibold text-accent mb-4">Content</h3>
+                        <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                    </div>
+                    </div>
                 </div>
+
+                <div className="w-full lg:w-1/3">
+                    <div className="space-y-6">
+                    <div className="bg-card-light rounded-xl p-6 border border-border-light">
+                        <h3 className="text-lg font-semibold text-accent mb-4">Featured Image</h3>
+                        <Input
+                        label="Upload Image :"
+                        type="file"
+                        className="mb-4 bg-input-dark text-text"
+                        accept="image/png, image/jpg, image/jpeg, image/gif"
+                        {...register("image", { required: !post })}
+                        />
+                        {post && (
+                        <div className="w-full mb-4">
+                            <div className="relative group">
+                            <img
+                                src={appService.filePreview(post.featuredImage)}
+                                alt={post.title}
+                                className="rounded-lg w-full h-48 object-cover border-2 border-border-light group-hover:border-accent transition-colors duration-200"
+                            />
+                            <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg"></div>
+                            </div>
+                        </div>
+                        )}
+                    </div>
+
+                    <div className="bg-card-light rounded-xl p-6 border border-border-light">
+                        <h3 className="text-lg font-semibold text-accent mb-4">Post Settings</h3>
+                        <Select
+                        options={["active", "inactive"]}
+                        label="Status"
+                        className="mb-6 bg-input-dark text-text"
+                        {...register("status", { required: true })}
+                        />
+                        <Button 
+                        type="submit" 
+                        bgColor={post ? "bg-accent hover:bg-accent-dark" : "bg-accent/80 hover:bg-accent"}
+                        className="w-full py-3 text-text font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                        > 
+                        {post ? "Update Post" : "Create Post"}
+                        </Button>
+                    </div>
+                    </div>
+                </div>
+                </form>
+            </div>
             </div>
         </div>
-    );
+);
+
     }

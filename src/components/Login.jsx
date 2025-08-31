@@ -1,111 +1,103 @@
 import React, { useState } from "react";
-import {useNavigate , Link} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-import {useForm} from 'react-hook-form'
-import {login as authLogin} from '../store/authSlice'
-import authService from '../../appwrite/auth'
-import {Button ,  Input , Logo} from './index'
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import { login as authLogin } from "../store/authSlice";
+import authService from "../../appwrite/auth";
+import { Button, Input, Logo } from "./index";
 
-
-function Login(){
-
+function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {register , handleSubmit} = useForm();
+    const { register, handleSubmit } = useForm();
     const [error, setError] = useState("");
 
-    const login = async (data)=>{
-        setError('');
+    const login = async (data) => {
+        setError("");
         try {
-            const session =  await authService.login(data);
-            if(session){
+            const session = await authService.login(data);
+            if (session) {
                 const userData = await authService.getCurrentUser();
-                if(userData){
+                if (userData) {
                     dispatch(authLogin(userData));
                 }
-                navigate('/');
+                navigate("/");
             }
         } catch (error) {
             setError(error.message);
         }
-        
     };
 
     return (
-        <div className='min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
+        <div className="min-h-screen bg-bg-dark flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="mx-auto w-full max-w-md">
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200 p-8 transform transition-all duration-300 hover:shadow-2xl">
+                <div className="bg-bg-card/95 backdrop-blur-md rounded-2xl shadow-xl border border-border p-8 transition-all duration-300 hover:shadow-2xl">
                     {/* Logo Section */}
                     <div className="mb-8 flex justify-center">
                         <div className="relative group">
-                            <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl group-hover:bg-blue-500/30 transition-all duration-300"></div>
+                            <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl group-hover:bg-accent/30 transition-all duration-300"></div>
                             <span className="relative inline-block w-full max-w-[100px] transform transition-transform duration-300 group-hover:scale-105">
-                                <Logo width="100%"></Logo>
+                                <Logo width="100%" />
                             </span>
                         </div>
                     </div>
 
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold text-blue-900 mb-2">Welcome Back</h2>
-                        <p className="text-blue-600/80">Sign in to your account</p>
+                        <h2 className="text-3xl font-bold text-text mb-2">Welcome Back</h2>
+                        <p className="text-text-secondary">Sign in to your account</p>
                     </div>
 
                     {/* Sign Up Link */}
                     <div className="text-center mb-6">
-                        <p className="text-sm text-blue-700/70">
-                            Don&apos;t have an account?{' '}
+                        <p className="text-sm text-text-secondary">
+                            Don&apos;t have an account?{" "}
                             <Link
                                 to="/sign-up"
-                                className="font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200 relative group"
+                                className="font-medium text-accent hover:underline transition-colors duration-200"
                             >
                                 Sign Up
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                             </Link>
                         </p>
                     </div>
 
                     {/* Error Message */}
                     {error && (
-                        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                            <p className="text-red-600 text-sm text-center font-medium">{error}</p>
+                        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                            <p className="text-red-400 text-sm text-center font-medium">{error}</p>
                         </div>
                     )}
 
                     {/* Login Form */}
                     <form onSubmit={handleSubmit(login)} className="space-y-6">
                         <div className="space-y-4">
-                            <div className="relative">
-                                <Input
-                                    label="Email"
-                                    placeholder="Enter your email"
-                                    type="email"
-                                    {...register("email", {
-                                        required: true,
-                                        pattern: {
-                                            value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                                            message: "Email address must be a valid address"
-                                        }
-                                    })}
-                                />
-                            </div>
+                            <Input
+                                label="Email"
+                                placeholder="Enter your email"
+                                type="email"
+                                {...register("email", {
+                                    required: true,
+                                    pattern: {
+                                        value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                                        message: "Email address must be a valid address",
+                                    },
+                                })}
+                            />
 
-                            <div className="relative">
-                                <Input
-                                    label="Password"
-                                    placeholder="Enter your password"
-                                    type="password"
-                                    {...register("password", {
-                                        required: true
-                                    })}
-                                />
-                            </div>
+                            <Input
+                                label="Password"
+                                placeholder="Enter your password"
+                                type="password"
+                                {...register("password", {
+                                    required: true,
+                                })}
+                            />
                         </div>
 
                         <div className="pt-4">
-                            <Button 
+                            <Button
                                 type="submit"
-                                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-500/20"
+                                className="w-full py-3 px-4 bg-accent hover:bg-accent/80 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-accent/30 focus:ring-4 focus:ring-accent/30"
                             >
                                 Sign In
                             </Button>
@@ -116,7 +108,7 @@ function Login(){
                     <div className="mt-6 text-center">
                         <Link
                             to="/forgot-password"
-                            className="text-sm text-blue-600 hover:text-blue-700 transition-colors duration-200"
+                            className="text-sm text-accent hover:underline transition-colors duration-200"
                         >
                             Forgot your password?
                         </Link>
@@ -125,13 +117,13 @@ function Login(){
 
                 {/* Footer */}
                 <div className="mt-8 text-center">
-                    <p className="text-xs text-blue-600/60">
+                    <p className="text-xs text-text-secondary">
                         By signing in, you agree to our Terms of Service and Privacy Policy
                     </p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;
