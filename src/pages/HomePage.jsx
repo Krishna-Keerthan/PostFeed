@@ -19,7 +19,7 @@ function HomePage() {
         <Container>
           <div className="flex justify-center items-center h-64">
             <h1 className="text-3xl font-semibold text-indigo-300">
-              Login to read posts
+              Posts will appear here.....
             </h1>
           </div>
         </Container>
