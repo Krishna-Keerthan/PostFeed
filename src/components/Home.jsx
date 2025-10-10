@@ -113,31 +113,6 @@ export default function Home() {
       </div>
 
       {/* Tech Stack Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-12 border border-gray-800 shadow-2xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-100 mb-4">
-              Built With Modern Technologies
-            </h2>
-            <p className="text-xl text-gray-400">
-              Leveraging the best tools for optimal performance
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {['React', 'Redux Toolkit', 'Appwrite', 'TinyMCE', 'Tailwind CSS', 'Vite', 'JavaScript', 'Git'].map((tech, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-center p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-600 transition-all hover:transform hover:scale-105"
-              >
-                <span className="text-lg font-semibold text-gray-300">
-                  {tech}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* CTA Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

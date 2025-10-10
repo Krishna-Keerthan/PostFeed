@@ -19,7 +19,7 @@ function Protected({
 
     },[navigate , authStatus , authentication])
     
-    return loader ? <h1>Loading...</h1>:
+    return loader ? <p className="font-bold text-5xl">Loading...</p>:
      <>{children}</>
 }
 
