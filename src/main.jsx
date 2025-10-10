@@ -7,13 +7,14 @@ import App from './App.jsx'
 import { createBrowserRouter  , RouterProvider} from 'react-router-dom'
 import Protected from './components/AuthLayout.jsx'
 
-import HomePage from '../src/pages/HomePage.jsx'
+import PostsPage from './pages/PostsPage.jsx'
 import AddPostPage  from '../src/pages/AddPostPage.jsx'
 import AllPostPage from '../src/pages/AllPostPage.jsx'
 import EditPostPage from '../src/pages/EditPostPage.jsx'
 import LoginPage from '../src/pages/LoginPage.jsx'
 import PostPage from '../src/pages/PostPage.jsx'
 import SignUpPage from '../src/pages/SignUpPage.jsx'
+import HomePage from './pages/HomePage.jsx'
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage/> ,
+      },
+      {
+        path: '/posts',
+        element: <PostsPage/> ,
       },
       {
         path: '/login',
